@@ -1,0 +1,430 @@
+@import "tailwindcss";
+
+@theme {
+  /* Cinematic Spider-Verse dusk palette */
+  --color-bone: #e8dfd4;
+  --color-bone-dim: #ddd3c8;
+  --color-ink: #1a1225;
+  --color-ink-soft: #2a1f35;
+  --color-dusk: #3d2854;
+  --color-acid: #d4924a;
+  --color-volt: #6b8fa3;
+  --color-ash: #7a7080;
+  --color-pink: #b8487a;
+  --color-lavender: #c4849a;
+  --color-purple: #3d2854;
+  --color-amber: #e8a855;
+  --color-red: #c45c5c;
+
+  --font-display: var(--font-bangers), "Impact", sans-serif;
+  --font-hero: var(--font-playfair), "Georgia", "Times New Roman", serif;
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-hand: var(--font-marker), cursive;
+
+  --animate-marquee: marquee 22s linear infinite;
+  --animate-marquee-slow: marquee 38s linear infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-glitch: glitch 3s infinite;
+  --animate-glitch-2: glitch-2 2.5s infinite;
+  --animate-flicker: flicker 4s infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- keyframes ---------- */
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes glitch {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(-3px, 1px); }
+  94% { transform: translate(3px, -1px); }
+  96% { transform: translate(-2px, -1px); }
+  98% { transform: translate(2px, 1px); }
+}
+
+@keyframes glitch-2 {
+  0%, 85%, 100% { opacity: 1; filter: none; }
+  86% { opacity: 0.8; filter: hue-rotate(90deg); }
+  88% { opacity: 1; filter: hue-rotate(-90deg); }
+  90% { opacity: 0.9; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.85; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes chromatic-shift {
+  0%, 100% { text-shadow: -2px 0 var(--color-volt), 2px 0 var(--color-pink); }
+  50% { text-shadow: 2px 0 var(--color-volt), -2px 0 var(--color-pink); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    background-color: var(--color-ink);
+  }
+
+  body {
+    background-color: var(--color-bone);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  section[id] {
+    scroll-margin-top: var(--nav-height, 3.5rem);
+  }
+
+  ::selection {
+    background-color: var(--color-pink);
+    color: white;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bone-dim);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink);
+    border: 2px solid var(--color-bone-dim);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-pink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ---------- typography ---------- */
+
+@utility display-hero {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4.8vw, 4rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+@utility display-hero-landing {
+  font-family: var(--font-hero);
+  font-size: clamp(1.875rem, 4.5vw, 3.75rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  font-feature-settings: "liga" 1, "kern" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+@utility hero-accent {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-pink);
+}
+
+@utility display-serif {
+  font-family: var(--font-hero);
+  font-size: clamp(1.75rem, 3.6vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  font-feature-settings: "liga" 1, "kern" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+@utility section-eyebrow {
+  font-family: var(--font-hero);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-pink);
+}
+
+@utility section-lead {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  color: color-mix(in srgb, var(--color-ink) 78%, transparent);
+}
+
+@utility serif-stat {
+  font-family: var(--font-hero);
+  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-transform: none;
+}
+
+@utility hero-lead {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+@utility serif-title {
+  font-family: var(--font-hero);
+  font-size: clamp(1.125rem, 1.5vw, 1.625rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+@utility section-lead-dark {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  color: color-mix(in srgb, var(--color-bone) 68%, transparent);
+}
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 3.8vw, 3rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.8vw, 2.25rem);
+  line-height: 0.94;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+@utility page-wrap {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+}
+
+@utility section-y {
+  padding-block: 3.5rem;
+}
+
+@utility touch-target {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+}
+
+@utility safe-bottom {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+}
+
+@utility safe-top {
+  padding-top: max(0px, env(safe-area-inset-top, 0px));
+}
+
+@layer components {
+  @media (min-width: 768px) {
+    .page-wrap {
+      padding-inline: max(1.5rem, env(safe-area-inset-left, 0px)) max(1.5rem, env(safe-area-inset-right, 0px));
+    }
+    .section-y {
+      padding-block: 5rem;
+    }
+  }
+}
+
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+@utility label-sm {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+@utility hand {
+  font-family: var(--font-hand);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ---------- Spider-Verse surfaces ---------- */
+
+@utility halftone {
+  background-image: radial-gradient(circle, var(--color-ink) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+@utility halftone-light {
+  background-image: radial-gradient(circle, rgb(255 255 255 / 0.15) 1px, transparent 1px);
+  background-size: 5px 5px;
+}
+
+@utility halftone-cyan {
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--color-volt) 30%, transparent) 1.2px, transparent 1.2px);
+  background-size: 7px 7px;
+}
+
+@utility halftone-pink {
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--color-pink) 25%, transparent) 1.2px, transparent 1.2px);
+  background-size: 7px 7px;
+}
+
+@utility comic-border {
+  border: 3px solid var(--color-ink);
+}
+
+@utility comic-shadow {
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+}
+
+@utility comic-shadow-sm {
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+}
+
+@utility comic-shadow-pink {
+  box-shadow: 6px 6px 0 0 var(--color-pink);
+}
+
+@utility comic-shadow-cyan {
+  box-shadow: 6px 6px 0 0 var(--color-volt);
+}
+
+@utility chromatic {
+  text-shadow: -1px 0 color-mix(in srgb, var(--color-volt) 70%, transparent),
+    1px 0 color-mix(in srgb, var(--color-pink) 70%, transparent);
+}
+
+@utility chromatic-hover {
+  transition: text-shadow 0.2s;
+  &:hover {
+    text-shadow: -3px 0 var(--color-volt), 3px 0 var(--color-pink), 0 0 20px color-mix(in srgb, var(--color-pink) 30%, transparent);
+  }
+}
+
+@utility text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-ink);
+}
+
+@utility text-stroke-light {
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(255 255 255 / 0.8);
+}
+
+@utility panel-tilt {
+  transform: rotate(-1.5deg);
+}
+
+@utility panel-tilt-r {
+  transform: rotate(1.5deg);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+}
+
+@utility grid-lines-dark {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+}
+
+@utility bg-dusk-sky {
+  background: linear-gradient(
+    175deg,
+    color-mix(in srgb, var(--color-lavender) 35%, var(--color-bone)) 0%,
+    var(--color-bone) 40%,
+    color-mix(in srgb, var(--color-pink) 12%, var(--color-bone-dim)) 100%
+  );
+}
+
+@utility bg-city-dusk {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-purple) 90%, #1a1225) 0%,
+    var(--color-ink-soft) 55%,
+    color-mix(in srgb, var(--color-lavender) 25%, var(--color-ink-soft)) 100%
+  );
+}
+
+@utility bg-golden-hour {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-amber) 18%, var(--color-bone)) 0%,
+    var(--color-bone) 50%,
+    color-mix(in srgb, var(--color-lavender) 22%, var(--color-bone-dim)) 100%
+  );
+}

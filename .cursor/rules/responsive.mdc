@@ -1,0 +1,51 @@
+---
+description: Responsive design standards for the portfolio — apply to all UI changes
+alwaysApply: true
+---
+
+# Responsive Design (Portfolio)
+
+Every UI change must work from **320px phones** through **desktop**. Do not ship fixed widths, desktop-only layouts, or decorative overflow.
+
+## Layout
+
+- **Container:** use `page-wrap` (+ `section-y` for vertical section padding). Do not invent new max-widths.
+- **Grids:** mobile-first — `grid-cols-1`, then `sm:` / `md:` / `lg:` as needed.
+  - Typical pattern: `grid-cols-1 lg:grid-cols-12` with `lg:col-span-*`.
+  - Cards: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`.
+- **Flex:** stack on mobile — `flex-col sm:flex-row`, `flex-wrap` on button groups.
+- **Overflow:** add `overflow-hidden` on sections with tilted panels or negative-offset decorations. Prefer fixing overflow over relying on `body { overflow-x: hidden }`.
+
+## Typography
+
+- Use existing utilities: `display-hero`, `display-xl`, `display-lg` (they use `clamp()`).
+- Add breakpoint steps for body copy when needed: `text-sm md:text-base`, `text-base sm:text-lg md:text-xl`.
+- Never use a single large fixed `text-*` without a smaller mobile fallback.
+
+## Touch & interaction
+
+- Interactive controls: `touch-target` (min 44×44px) on buttons, nav links, chips.
+- Hide or lower z-index of **ChatWidget FAB** and **ScrollProgress** when mobile nav is open (`useNavMenuOpen` / `NAV_MENU` event).
+
+## Fixed / overlay UI
+
+- **Navbar:** phones → hamburger; tablet (`md`–`lg`) → compact inline nav + CV; desktop → full nav + side résumé dock.
+- **Chat panel:** full-width on mobile (`inset-x-3`), capped width on `sm+`. Respect `safe-bottom` / notch insets.
+- **Modals (résumé, chat):** lock body scroll while open; `Escape` to close.
+
+## Decorations
+
+- SpiderWeb accents: `hidden md:block` or `hidden lg:block`. Keep inside `overflow-hidden` parents.
+- Comic bursts and badges: scale down on mobile (`text-[10px]`, smaller padding).
+
+## Images
+
+- Always set responsive `sizes` on `next/image`.
+- Cap portrait/hero height with `max-h-[min(42svh,320px)]` or similar — never unbounded aspect ratios on mobile.
+
+## Checklist before finishing
+
+1. No horizontal scroll at 320px, 768px, 1024px, 1440px.
+2. All sections stack readably on phone.
+3. CTAs and nav are tappable without zoom.
+4. Overlays do not fight each other (z-index / hide rules).
