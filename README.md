@@ -1,3 +1,4 @@
+
 # Divvye Kansara — Portfolio
 
 This is my personal portfolio — a Spider-Verse inspired site where recruiters can browse my work, read project case studies, preview my résumé, and ask an AI assistant questions about my skills and experience. The assistant answers in first person, grounded strictly in my résumé, so nothing gets invented.
@@ -7,7 +8,7 @@ This is my personal portfolio — a Spider-Verse inspired site where recruiters 
 **I make cool stuff come to life. Wanna take a tour??**
 [Live site →](https://github.com/divvyesk/portfolio)
 
-<img width="1263" height="703" alt="Portfolio landing page — Divvye Kansara, Full-Stack & AI Engineer" src="./public/readme-landing.png" />
+<img width="1429" height="710" alt="Screenshot 2026-07-30 at 2 03 14 AM" src="https://github.com/user-attachments/assets/61519189-5347-41b9-96bd-7683ee19e893" />
 
 ---
 
