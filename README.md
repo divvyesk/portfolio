@@ -1,7 +1,7 @@
 
-# Divvye Kansara — Portfolio
+# Divvye Kansara - Portfolio
 
-This is my personal portfolio — a Spider-Verse inspired site where recruiters can browse my work, read project case studies, preview my résumé, and ask an AI assistant questions about my skills and experience. The assistant answers in first person, grounded strictly in my résumé, so nothing gets invented.
+This is my personal portfolio, a Spider-Verse inspired site where recruiters can browse my work, read project case studies, preview my résumé, and ask an AI assistant questions about my skills and experience. The assistant answers in first person, grounded strictly in my resume, so nothing gets invented.
 
 ---
 
@@ -12,7 +12,7 @@ This is my personal portfolio — a Spider-Verse inspired site where recruiters 
 
 ---
 
-[Download my résumé (PDF)](./public/Divvye_Kansara_Resume.pdf)
+[Download my resume (PDF)](./public/Divvye_Kansara_Resume.pdf)
 
 ---
 
