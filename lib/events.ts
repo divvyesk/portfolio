@@ -3,15 +3,15 @@ export const OPEN_RESUME = "portfolio:open-resume";
 export const NAV_MENU = "portfolio:nav-menu";
 
 /** Opens the AI chat panel, optionally seeding it with a question. */
-export const openChat = (question?: string) => {
+export function openChat(question?: string): void {
   window.dispatchEvent(new CustomEvent(OPEN_CHAT, { detail: question ?? null }));
-};
+}
 
-export const openResume = () => {
+export function openResume(): void {
   window.dispatchEvent(new CustomEvent(OPEN_RESUME));
-};
+}
 
 /** Broadcast mobile nav open/closed so overlays (chat FAB, progress bar) can react. */
-export const setNavMenuOpen = (open: boolean) => {
+export function setNavMenuOpen(open: boolean): void {
   window.dispatchEvent(new CustomEvent(NAV_MENU, { detail: open }));
-};
+}

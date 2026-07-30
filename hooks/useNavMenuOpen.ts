@@ -8,7 +8,7 @@ export function useNavMenuOpen() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handler = (event) => setOpen(Boolean(event.detail));
+    const handler = (event: Event) => setOpen(Boolean((event as CustomEvent<boolean>).detail));
     window.addEventListener(NAV_MENU, handler);
     return () => window.removeEventListener(NAV_MENU, handler);
   }, []);
