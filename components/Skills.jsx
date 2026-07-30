@@ -6,7 +6,7 @@ import Reveal from "./ui/Reveal";
 import ComicBurst from "./ui/ComicBurst";
 import { ArrowUpRight, Spider } from "./ui/Icons";
 
-const glyphs: Record<string, React.ReactNode> = {
+const glyphs = {
   languages: <path d="M9 6 3 12l6 6M15 6l6 6-6 6" />,
   frontend: <path d="M3 5h18v14H3zM3 9h18M7 5v4" />,
   backend: <path d="M4 5h16v5H4zM4 14h16v5H4M8 7.5h.01M8 16.5h.01" />,

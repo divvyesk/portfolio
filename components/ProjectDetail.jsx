@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import type { Project } from "@/lib/resume";
 import { openChat } from "@/lib/events";
 import ProjectThumbnail from "./ui/ProjectThumbnail";
 import Reveal from "./ui/Reveal";
@@ -11,12 +10,7 @@ import ComicBurst from "./ui/ComicBurst";
 import SpiderWeb from "./ui/SpiderWeb";
 import { ArrowRight, ArrowUpRight, Spark, Spider } from "./ui/Icons";
 
-type Props = {
-  project: Project;
-  next: Project;
-};
-
-export default function ProjectDetail({ project, next }: Props) {
+export default function ProjectDetail({ project, next }) {
   return (
     <main className="pt-14 md:pt-[60px]">
       <section className="relative overflow-hidden comic-border border-x-0 border-t-0 bg-ink text-bone">

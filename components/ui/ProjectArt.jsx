@@ -2,16 +2,11 @@
 
 import { motion } from "framer-motion";
 
-type Props = {
-  slug: string;
-  className?: string;
-};
-
 const bars = [34, 52, 41, 68, 58, 84, 72, 96];
 const wave = [18, 44, 26, 70, 92, 58, 80, 36, 62, 28, 74, 46, 88, 34, 54, 22];
 const qr = Array.from({ length: 64 }, (_, i) => (i * 7 + Math.floor(i / 8) * 3) % 5 < 2);
 
-export default function ProjectArt({ slug, className = "" }: Props) {
+export default function ProjectArt({ slug, className = "" }) {
   if (slug === "finos") {
     return (
       <div className={`relative overflow-hidden bg-ink ${className}`}>

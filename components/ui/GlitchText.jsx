@@ -2,15 +2,8 @@
 
 import { motion } from "framer-motion";
 
-type Props = {
-  children: React.ReactNode;
-  className?: string;
-  as?: "span" | "h1" | "h2" | "p";
-  chromatic?: boolean;
-};
-
 /** Comic-style text with optional chromatic aberration and glitch flicker. */
-export default function GlitchText({ children, className = "", as: Tag = "span", chromatic = true }: Props) {
+export default function GlitchText({ children, className = "", as: Tag = "span", chromatic = true }) {
   return (
     <motion.span
       className={`relative inline-block ${chromatic ? "chromatic" : ""} ${className}`}

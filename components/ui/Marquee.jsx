@@ -1,13 +1,6 @@
 import { Spider } from "./Icons";
 
-type Props = {
-  items: string[];
-  className?: string;
-  itemClassName?: string;
-  slow?: boolean;
-};
-
-export default function Marquee({ items, className = "", itemClassName, slow = false }: Props) {
+export default function Marquee({ items, className = "", itemClassName, slow = false }) {
   const track = [...items, ...items];
   const itemStyles = itemClassName ?? "label flex items-center whitespace-nowrap";
 

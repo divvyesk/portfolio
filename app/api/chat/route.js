@@ -8,14 +8,12 @@ const MODEL = process.env.GROQ_MODEL ?? "llama-3.3-70b-versatile";
 const MAX_TURNS = 12;
 const MAX_CHARS = 1200;
 
-type ChatMessage = { role: "user" | "assistant"; content: string };
-
 /** Small in-memory limiter — enough to stop a single browser hammering the key. */
-const hits = new Map<string, number[]>();
+const hits = new Map();
 const LIMIT = 14;
 const WINDOW_MS = 60_000;
 
-const rateLimited = (ip: string) => {
+const rateLimited = (ip) => {
   const now = Date.now();
   const recent = (hits.get(ip) ?? []).filter((time) => now - time < WINDOW_MS);
   recent.push(now);
@@ -24,9 +22,9 @@ const rateLimited = (ip: string) => {
   return recent.length > LIMIT;
 };
 
-const isChatMessage = (value: unknown): value is ChatMessage => {
+const isChatMessage = (value) => {
   if (typeof value !== "object" || value === null) return false;
-  const candidate = value as Record<string, unknown>;
+  const candidate = value;
   return (
     (candidate.role === "user" || candidate.role === "assistant") &&
     typeof candidate.content === "string" &&
@@ -34,7 +32,7 @@ const isChatMessage = (value: unknown): value is ChatMessage => {
   );
 };
 
-export async function POST(request: Request) {
+export async function POST(request) {
   const apiKey = process.env.GROQ_API_KEY;
 
   if (!apiKey) {
@@ -54,14 +52,14 @@ export async function POST(request: Request) {
     return Response.json({ error: "That's a lot of questions at once. Give it a minute and try again." }, { status: 429 });
   }
 
-  let payload: unknown;
+  let payload;
   try {
     payload = await request.json();
   } catch {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const raw = (payload as { messages?: unknown })?.messages;
+  const raw = payload?.messages;
   if (!Array.isArray(raw)) {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
   }
@@ -88,7 +86,7 @@ export async function POST(request: Request) {
     });
 
     const encoder = new TextEncoder();
-    const stream = new ReadableStream<Uint8Array>({
+    const stream = new ReadableStream({
       async start(controller) {
         try {
           for await (const chunk of completion) {
@@ -111,7 +109,7 @@ export async function POST(request: Request) {
       },
     });
   } catch (error) {
-    const status = (error as { status?: number })?.status;
+    const status = error?.status;
     const message =
       status === 401
         ? "That Groq API key was rejected. Double-check GROQ_API_KEY in .env.local."

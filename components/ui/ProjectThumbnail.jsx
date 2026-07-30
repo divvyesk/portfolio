@@ -4,15 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import ProjectArt from "./ProjectArt";
 
-type Props = {
-  slug: string;
-  thumbnail: string;
-  alt: string;
-  className?: string;
-  priority?: boolean;
-};
-
-export default function ProjectThumbnail({ slug, thumbnail, alt, className = "", priority = false }: Props) {
+export default function ProjectThumbnail({ slug, thumbnail, alt, className = "", priority = false }) {
   const [failed, setFailed] = useState(false);
 
   if (failed) {

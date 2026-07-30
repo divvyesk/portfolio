@@ -13,7 +13,7 @@ import ComicBurst from "./ui/ComicBurst";
 import { ArrowDown, ArrowRight, Spark, Spider } from "./ui/Icons";
 
 export default function Hero() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -40]);

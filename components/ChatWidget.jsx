@@ -8,11 +8,9 @@ import { useNavMenuOpen } from "@/hooks/useNavMenuOpen";
 import { profile } from "@/lib/resume";
 import { Close, Send, Spark, Spider } from "./ui/Icons";
 
-type Message = { role: "user" | "assistant"; content: string };
-
 const URL_PATTERN = /(https?:\/\/[^\s<]+[^\s<.,;:!?)\]'"])/g;
 
-function renderMessageContent(content: string) {
+function renderMessageContent(content) {
   const parts = content.split(URL_PATTERN);
   return parts.map((part, index) => {
     if (/^https?:\/\//.test(part)) {
@@ -34,25 +32,25 @@ function renderMessageContent(content: string) {
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const [nudge, setNudge] = useState(false);
   const navMenuOpen = useNavMenuOpen();
 
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
-  const abortRef = useRef<AbortController | null>(null);
+  const scrollRef = useRef(null);
+  const inputRef = useRef(null);
+  const abortRef = useRef(null);
 
   const send = useCallback(
-    async (text: string) => {
+    async (text) => {
       const question = text.trim();
       if (!question || streaming) return;
 
       setError(null);
       setInput("");
-      const nextHistory: Message[] = [...messages, { role: "user", content: question }];
+      const nextHistory = [...messages, { role: "user", content: question }];
       setMessages([...nextHistory, { role: "assistant", content: "" }]);
       setStreaming(true);
 
@@ -87,8 +85,8 @@ export default function ChatWidget() {
           });
         }
       } catch (err) {
-        if ((err as Error).name === "AbortError") return;
-        setError((err as Error).message);
+        if (err.name === "AbortError") return;
+        setError(err.message);
         setMessages((current) => current.filter((message, i) => !(i === current.length - 1 && message.content === "")));
       } finally {
         setStreaming(false);
@@ -99,9 +97,9 @@ export default function ChatWidget() {
   );
 
   useEffect(() => {
-    const handler = (event: Event) => {
+    const handler = (event) => {
       setOpen(true);
-      const seeded = (event as CustomEvent<string | null>).detail;
+      const seeded = event.detail;
       if (seeded) {
         setTimeout(() => void send(seeded), 380);
       } else {
@@ -121,7 +119,7 @@ export default function ChatWidget() {
   }, []);
 
   useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
+    const onKey = (event) => {
       if (event.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);

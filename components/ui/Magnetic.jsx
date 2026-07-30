@@ -1,17 +1,11 @@
 "use client";
 
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useRef, type ReactNode } from "react";
-
-type Props = {
-  children: ReactNode;
-  className?: string;
-  strength?: number;
-};
+import { useRef } from "react";
 
 /** Nudges its child toward the cursor while hovered. */
-export default function Magnetic({ children, className, strength = 0.35 }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
+export default function Magnetic({ children, className, strength = 0.35 }) {
+  const ref = useRef(null);
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
   const x = useSpring(rawX, { stiffness: 260, damping: 22, mass: 0.4 });

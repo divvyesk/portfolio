@@ -9,19 +9,7 @@ import { scrollToSection, startScroll, stopScroll, syncNavScrollMargin } from "@
 import { openChat, openResume, setNavMenuOpen } from "@/lib/events";
 import { Close, Doc, Spark, Spider } from "./ui/Icons";
 
-function NavLink({
-  link,
-  isHome,
-  isActive,
-  onGo,
-  compact = false,
-}: {
-  link: (typeof navLinks)[number];
-  isHome: boolean;
-  isActive: boolean;
-  onGo: (id: string) => void;
-  compact?: boolean;
-}) {
+function NavLink({ link, isHome, isActive, onGo, compact = false }) {
   const className = `label relative touch-target transition-colors ${
     compact ? "px-2 py-2 text-[10px]" : "px-4 py-2.5"
   } ${isActive ? "text-pink" : "text-ash hover:text-ink"}`;
@@ -77,7 +65,7 @@ export default function Navbar() {
     if (!isHome) return;
     const sections = navLinks
       .map((link) => document.getElementById(link.id))
-      .filter((el): el is HTMLElement => Boolean(el));
+      .filter((el) => Boolean(el));
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -103,7 +91,7 @@ export default function Navbar() {
 
     stopScroll();
     document.body.style.overflow = "hidden";
-    const onKey = (event: KeyboardEvent) => event.key === "Escape" && setMenuOpen(false);
+    const onKey = (event) => event.key === "Escape" && setMenuOpen(false);
     window.addEventListener("keydown", onKey);
 
     return () => {
@@ -114,7 +102,7 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const go = (id: string) => {
+  const go = (id) => {
     setMenuOpen(false);
     if (isHome) scrollToSection(id);
   };

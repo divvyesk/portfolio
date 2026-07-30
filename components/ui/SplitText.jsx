@@ -1,16 +1,8 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
-type Props = {
-  text: string;
-  className?: string;
-  delay?: number;
-  stagger?: number;
-  once?: boolean;
-};
-
-const word: Variants = {
+const word = {
   hidden: { y: "110%" },
   visible: { y: "0%" },
 };
@@ -20,7 +12,7 @@ const word: Variants = {
  * The unclipped wrapper drives the viewport trigger — observing the masked
  * words themselves never fires, because they start fully clipped.
  */
-export default function SplitText({ text, className, delay = 0, stagger = 0.06, once = true }: Props) {
+export default function SplitText({ text, className, delay = 0, stagger = 0.06, once = true }) {
   const words = text.split(" ");
 
   return (

@@ -19,7 +19,7 @@ export default function SmoothScroll() {
     syncNavScrollMargin();
 
     const header = document.querySelector("header");
-    let resizeObserver: ResizeObserver | undefined;
+    let resizeObserver;
     if (header) {
       resizeObserver = new ResizeObserver(() => {
         syncNavScrollMargin();
@@ -35,7 +35,7 @@ export default function SmoothScroll() {
     }
 
     let frame = 0;
-    const raf = (time: number) => {
+    const raf = (time) => {
       lenis.raf(time);
       frame = requestAnimationFrame(raf);
     };

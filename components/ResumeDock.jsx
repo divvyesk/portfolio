@@ -50,7 +50,7 @@ export default function ResumeDock() {
     setInlinePdf(window.matchMedia("(min-width: 768px)").matches);
     stopScroll();
     document.body.style.overflow = "hidden";
-    const onKey = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
+    const onKey = (event) => event.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => {
       startScroll();

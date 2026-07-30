@@ -1,4 +1,3 @@
-import type { Metadata, Viewport } from "next";
 import { Bangers, Barlow_Condensed, JetBrains_Mono, Permanent_Marker, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -26,7 +25,7 @@ const barlow = Barlow_Condensed({
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap" });
 const marker = Permanent_Marker({ subsets: ["latin"], weight: "400", variable: "--font-marker", display: "swap" });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: `${profile.name} | ${profile.role}`,
   description: profile.blurb,
   keywords: ["Divvye Kansara", "Full Stack Developer", "React", "Next.js", "AI Engineer", "Portfolio"],
@@ -38,14 +37,14 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
+export const viewport = {
   themeColor: "#1a1225",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body

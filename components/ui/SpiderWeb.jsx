@@ -1,10 +1,5 @@
-type Props = {
-  className?: string;
-  color?: string;
-};
-
 /** Decorative spider-web SVG — Spider-Verse corner accent. */
-export default function SpiderWeb({ className = "size-32", color = "currentColor" }: Props) {
+export default function SpiderWeb({ className = "size-32", color = "currentColor" }) {
   return (
     <svg viewBox="0 0 120 120" fill="none" className={className} aria-hidden>
       {[20, 35, 50, 65].map((r) => (

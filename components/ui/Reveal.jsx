@@ -1,16 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
 
-type Props = {
-  children: ReactNode;
-  delay?: number;
-  y?: number;
-  className?: string;
-};
-
-export default function Reveal({ children, delay = 0, y = 26, className }: Props) {
+export default function Reveal({ children, delay = 0, y = 26, className }) {
   return (
     <motion.div
       className={className}
