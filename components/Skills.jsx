@@ -33,7 +33,7 @@ export default function Skills() {
       <div aria-hidden className="pointer-events-none absolute inset-0 halftone-light opacity-20" />
       <div aria-hidden className="pointer-events-none absolute inset-0 grid-lines-dark" />
 
-      <div className="relative page-wrap section-y">
+      <div className="relative page-wrap py-14 md:py-20 xl:py-14">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <div className="section-eyebrow flex items-center gap-3">
@@ -63,7 +63,7 @@ export default function Skills() {
                 whileInView={{ opacity: 1, y: 0, rotate: 0 }}
                 viewport={{ once: true, margin: "-8% 0px" }}
                 transition={{ delay: (i % 3) * 0.07, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative p-5 transition-all duration-300 md:p-6 ${cellBorder} ${cardColors[i]} hover:text-ink`}
+                className={`group relative p-4 transition-all duration-300 md:p-5 ${cellBorder} ${cardColors[i]} hover:text-ink`}
               >
                 <div className="flex items-start justify-between">
                   <svg
@@ -71,7 +71,7 @@ export default function Skills() {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
-                    className="size-7 text-volt transition-colors duration-300 group-hover:text-ink"
+                    className="size-6 text-volt transition-colors duration-300 group-hover:text-ink"
                     aria-hidden
                   >
                     {glyphs[group.id]}
@@ -81,16 +81,16 @@ export default function Skills() {
                   </span>
                 </div>
 
-                <h3 className="serif-title mt-6 text-bone transition-colors group-hover:text-ink">{group.title}</h3>
-                <p className="mt-2.5 section-lead-dark text-sm transition-colors group-hover:text-ink/75">
+                <h3 className="serif-title mt-4 text-bone transition-colors group-hover:text-ink">{group.title}</h3>
+                <p className="mt-2 section-lead-dark text-sm leading-snug transition-colors group-hover:text-ink/75">
                   {group.blurb}
                 </p>
 
-                <ul className="mt-5 flex flex-wrap gap-1.5">
+                <ul className="mt-3.5 flex flex-wrap gap-1.5">
                   {group.items.map((item) => (
                     <li
                       key={item}
-                      className="label-sm border-[2px] border-bone/30 px-2 py-1 text-bone/80 transition-colors group-hover:border-ink/25 group-hover:text-ink"
+                      className="label-sm border-[2px] border-bone/30 px-2 py-[3px] text-bone/80 transition-colors group-hover:border-ink/25 group-hover:text-ink"
                     >
                       {item}
                     </li>
